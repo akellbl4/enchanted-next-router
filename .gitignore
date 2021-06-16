@@ -1,0 +1,13 @@
+node_modules
+dist
+esm
+*.log
+*.tgz
+.env
+.next
+.DS_Store
+.idea
+.vscode
+examples/**/yarn.lock
+package-lock.json
+playground/**

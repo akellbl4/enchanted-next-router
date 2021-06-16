@@ -1,0 +1,74 @@
+{
+  "name": "enchanted-next-router",
+  "version": "0.0.1",
+  "description": "Enhance functions and params of the Next.js Router",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "react-native": "./dist/index.esm.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "repository": "git@github.com:akellbl4/enchanted-next-router.git",
+  "license": "MIT",
+  "scripts": {
+    "build": "bunchee index.ts -m --no-sourcemap",
+    "watch": "bunchee index.ts --watch",
+    "prepublishOnly": "rm -rf dist && yarn build",
+    "types:check": "tsc --noEmit",
+    "format": "prettier --write \"{index,test,examples}/**/*.{ts,tsx}\"",
+    "lint": "eslint \"{index,test,examples}/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"{index,test,examples}/**/*.{ts,tsx}\" --fix",
+    "test": "jest",
+    "register": "yarn link && cd node_modules/react && yarn link"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn types:check && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn lint:fix",
+      "yarn format",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "11.2.7",
+    "@types/jest": "26.0.23",
+    "@types/node": "15.12.2",
+    "@types/react": "17.0.11",
+    "@types/react-dom": "17.0.7",
+    "@typescript-eslint/eslint-plugin": "4.27.0",
+    "@typescript-eslint/parser": "4.27.0",
+    "bunchee": "1.6.0",
+    "concurrently": "6.2.0",
+    "eslint": "7.28.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-jest-dom": "3.9.0",
+    "eslint-plugin-react": "7.24.0",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-testing-library": "4.6.0",
+    "husky": "6.0.0",
+    "jest": "27.0.4",
+    "lint-staged": "11.0.0",
+    "next": "11.0.0",
+    "prettier": "2.3.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.2",
+    "ts-jest": "27.0.3",
+    "typescript": "4.3.2"
+  },
+  "peerDependencies": {
+    "next": "^10.0.0 || ^11.0.0 ",
+    "react": "^16.11.0 || ^17.0.0"
+  }
+}
