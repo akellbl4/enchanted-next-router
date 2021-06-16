@@ -53,18 +53,20 @@ export function useRouter() {
     query[key] = value
   })
 
-  return Object.assign({}, router, { pathname, queryString, query, params, push, replace })
+  return {
+    ...router,
+    pathname,
+    queryString,
+    query,
+    params,
+    push,
+    replace
+  }
 }
 
-const Router = Object.assign<
-  typeof NextRouter,
-  {
-    push: typeof push
-    replace: typeof replace
-  }
->(NextRouter, {
-  push,
-  replace
-})
+const Router: Omit<typeof NextRouter, 'push' | 'replace'> & {
+  push: typeof push
+  replace: typeof replace
+} = { ...NextRouter, push, replace }
 
 export default Router
