@@ -22,7 +22,7 @@ Redefindes `push` and `replace`.
 
 It's drops second argument `as` because it's became unnecessary since 10.x
 
-`const { push } = useRouter()` or `Router.push`
+`const { push } = useRouter()` or `Router.push`  
 `const { replace } = useRouter()` or `Router.replace`
 
 - `url` - The URL to navigate to
