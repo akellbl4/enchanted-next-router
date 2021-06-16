@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["esnext", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
+    "types": ["node", "jest"],
+    "strict": true,
+    "target": "es5",
+    "typeRoots": ["./types", "./node_modules/@types"]
+  },
+  "include": ["index.ts"],
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority"
+  }
+}
