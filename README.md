@@ -4,12 +4,16 @@ Basically it's reexports whole `next/router` and polish its API.
 
 ## Install
 
-```
-// with npm
-npm install enchanted-next-router
+With npm
 
-// with yarn
-yarn add enchanted-next-router
+```
+$ npm install enchanted-next-router
+````
+
+With yarn
+
+```
+$ yarn add enchanted-next-router
 ```
 
 ## API
