@@ -38,3 +38,8 @@ It's drops second argument `as` because it's became unnecessary since 10.x
 - `pathname` - Represents current pathname in the URL.
 - `params` - Contains params from dynamic params of the URL. For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post` -> `params` is `{ slug: 'my-blog-post' }`
 - `query` - Contains only params from query string. For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post?show=1` -> `params` is `{ show: '1' }`
+
+
+## References
+
+[An Overview on the Current State of Next.js Router](https://pavel.mineev.me/blog/nextjs-router-tips-and-tricks)
