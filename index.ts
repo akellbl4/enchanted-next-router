@@ -1,5 +1,9 @@
 import { UrlObject } from 'url'
-import NextRouter, { useRouter as useNextRouter } from 'next/router'
+import NextRouter, {
+  useRouter as useNextRouter,
+  NextRouter as INextRouter,
+  SingletonRouter,
+} from 'next/router'
 
 declare type Url = UrlObject | string
 interface TransitionOptions {
@@ -7,6 +11,20 @@ interface TransitionOptions {
   locale?: string | false
   scroll?: boolean
 }
+
+type RedefinedFunctions = {
+  push: typeof push
+  replace: typeof replace
+}
+
+type ISingletonRouter = Omit<SingletonRouter, 'push' | 'replace'> &
+  RedefinedFunctions
+
+type IRouter = Omit<INextRouter, 'push' | 'replace'> &
+  RedefinedFunctions & {
+    queryString: string | undefined
+    params: Record<string, string | string[] | undefined>
+  }
 
 /**
  * Performs a `pushState` with arguments
@@ -26,10 +44,10 @@ function replace(url: Url, opts?: TransitionOptions) {
   return NextRouter.replace(url, undefined, opts)
 }
 
-export function useRouter() {
+export function useRouter(): IRouter {
   const router = useNextRouter()
-  const [pathname, queryString = ''] = router.asPath.split('?')
-  const searchParams = new URLSearchParams(queryString)
+  const [pathname, queryString] = router.asPath.split('?')
+  const searchParams = new URLSearchParams(queryString || '')
   const params = { ...router.query }
   const query: Record<string, string | string[]> = {}
 
@@ -60,13 +78,10 @@ export function useRouter() {
     query,
     params,
     push,
-    replace
+    replace,
   }
 }
 
-const Router: Omit<typeof NextRouter, 'push' | 'replace'> & {
-  push: typeof push
-  replace: typeof replace
-} = { ...NextRouter, push, replace }
+const Router: ISingletonRouter = { ...NextRouter, push, replace }
 
 export default Router
