@@ -1,6 +1,14 @@
 {
   "name": "enchanted-next-router",
   "version": "0.0.5",
+  "keywords": [
+    "next",
+    "nextjs",
+    "router",
+    "next/router",
+    "next-router",
+    "enchanced-router"
+  ],
   "description": "Enhance functions and params of the Next.js Router",
   "author": {
     "name": "Pavel Mineev",
