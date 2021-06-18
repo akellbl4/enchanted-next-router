@@ -1,6 +1,8 @@
 # Enchanted Next.js Router
 
-Basically it's reexports whole `next/router` and polish its API.
+![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router)
+
+It reexports the whole `next/router` with redefined routing functions and extended params.
 
 ## Install
 
@@ -8,7 +10,7 @@ With npm
 
 ```
 $ npm install enchanted-next-router
-````
+```
 
 With yarn
 
@@ -24,7 +26,7 @@ Redefindes `push` and `replace`.
 
 #### `push(url, opts)` / `replace(url, opts)`
 
-It's drops second argument `as` because it's became unnecessary since 10.x
+Drops second argument `as` because it's became unnecessary since 10.x
 
 `const { push } = useRouter()` or `Router.push`  
 `const { replace } = useRouter()` or `Router.replace`
@@ -40,10 +42,16 @@ It's drops second argument `as` because it's became unnecessary since 10.x
 `const { query, params, pathname } = useRouter()`
 
 - `pathname` - Represents current pathname in the URL.
-- `params` - Contains params from dynamic params of the URL. For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post` -> `params` is `{ slug: 'my-blog-post' }`
-- `query` - Contains only params from query string. For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post?show=1` -> `params` is `{ show: '1' }`
-
+- `params` - Contains params from dynamic params of the URL.
+  For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post` -> `params` is `{ slug: 'my-blog-post' }`
+- `query` - Contains only params from query string.
+  For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post?show=1` -> `params` is `{ show: '1' }`
 
 ## References
 
-[An Overview on the Current State of Next.js Router](https://pavel.mineev.me/blog/nextjs-router-tips-and-tricks)
+- [Next.js Router Documentation](https://nextjs.org/docs/api-reference/next/router)
+- [An Overview on the Current State of Next.js Router](https://pavel.mineev.me/blog/nextjs-router-tips-and-tricks)
+
+## Creds
+
+I want to say thanks to the Next.js team and Vercel. I appreciate their work and the things that they've done. I like using Next.js in my projects but I want to make some parts of it a bit better. As a result, I decided to share my handy enhancement on Next.js Router.
