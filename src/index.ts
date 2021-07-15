@@ -46,7 +46,7 @@ export function replace(url: Url, opts?: TransitionOptions) {
 	return NextRouter.replace(url, undefined, opts)
 }
 
-export function useRouter<P extends ParsedUrlQuery = {}>(): EnchantedRouter {
+export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter {
 	const router = useNextRouter()
 	const [pathname, queryString] = router.asPath.split('?')
 	const query = urlParamsToHashMap(new URLSearchParams(queryString || ''))
