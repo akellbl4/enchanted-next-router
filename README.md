@@ -1,4 +1,4 @@
-# Enchanted Next.js Router
+# 🧙‍♂️ Enchanted Next.js Router
 
 ![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router)
 
