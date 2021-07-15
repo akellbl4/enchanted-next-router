@@ -1,6 +1,9 @@
-on: ['push', 'pull_request']
-
 name: Test Coverage
+
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 jobs:
   build:
@@ -15,11 +18,15 @@ jobs:
           node-version: '14'
 
       - name: Build coverage report
+        env:
+          CI: true
         run: |
           yarn
           yarn test:coverage
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
+        env:
+          COVERALLS_DEBUG: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
