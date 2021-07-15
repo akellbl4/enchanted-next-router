@@ -1,4 +1,4 @@
-import { intersectObjects } from '../index'
+import { intersectObjects } from '../src/lib/intersect-object'
 
 describe('intersectObjects', () => {
 	it('should filter interct fields', () => {

@@ -5,7 +5,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import * as router from 'next/router'
 
-import { EnchantedRouter, useRouter } from '../index'
+import { EnchantedRouter, useRouter } from '../src/index'
 
 describe('useRouter', () => {
 	it('should return router', () => {

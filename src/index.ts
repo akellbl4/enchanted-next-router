@@ -7,6 +7,9 @@ import NextRouter, {
 import type { GetServerSidePropsContext } from 'next'
 import type { ParsedUrlQuery } from 'querystring'
 
+import { intersectObjects } from './lib/intersect-object'
+import { urlParamsToHashMap } from './lib/url-params-to-hash-map'
+
 declare type Url = UrlObject | string
 type TransitionOptions = Parameters<typeof NextRouter.push>[2]
 
@@ -24,32 +27,6 @@ export type EnchantedRouter = Omit<INextRouter, 'push' | 'replace'> &
 		queryString: string | undefined
 		params: ParsedUrlQuery
 	}
-
-export function intersectObjects<
-	T1 extends { [k: string]: unknown },
-	T2 extends { [k: string]: unknown }
->(source: T1, filter: T2) {
-	return Object.keys(filter).reduce(
-		(acc, key) => {
-			if (key in acc) {
-				delete acc[key]
-			}
-			return acc
-		},
-		{ ...source }
-	)
-}
-
-export function urlParamsToHashMap(params: URLSearchParams): ParsedUrlQuery {
-	const result: ParsedUrlQuery = {}
-
-	params.forEach((_, key) => {
-		const value = params.getAll(key)
-		result[key] = value.length === 1 ? value[0] : value
-	})
-
-	return result
-}
 
 /**
  * Performs a `pushState` with arguments

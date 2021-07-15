@@ -1,4 +1,4 @@
-import { urlParamsToHashMap } from '../index'
+import { urlParamsToHashMap } from '../src/lib/url-params-to-hash-map'
 
 describe('urlParamsToHashMap', () => {
 	it('should return an empty hash map if no params are passed', () => {

@@ -19,8 +19,8 @@
   "repository": "git@github.com:akellbl4/enchanted-next-router.git",
   "license": "MIT",
   "scripts": {
-    "build": "bunchee index.ts -m --no-sourcemap",
-    "watch": "bunchee index.ts --watch",
+    "build": "bunchee src/index.ts -m --no-sourcemap",
+    "watch": "bunchee src/index.ts --watch",
     "prepublishOnly": "rm -rf dist && yarn build",
     "types:check": "tsc --noEmit",
     "format": "prettier --write \"{index,test,examples}/**/*.{ts,tsx}\"",
