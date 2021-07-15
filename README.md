@@ -1,6 +1,6 @@
 # 🧙‍♂️ Enchanted Next.js Router
 
-![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router)
+![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router) [![Coverage Status](https://coveralls.io/repos/github/akellbl4/enchanted-next-router/badge.svg?branch=main)](https://coveralls.io/github/akellbl4/enchanted-next-router?branch=main)
 
 It reexports the whole `next/router` with redefined routing functions and extended params.
 
@@ -55,7 +55,7 @@ function getServerSideProps(c) {
       params,
       query,
       fullQuery,
-    }
+    },
   }
 }
 ```
@@ -79,4 +79,3 @@ function getServerSideProps(c) {
 ## Creds
 
 I want to say thanks to the Next.js team and Vercel. I appreciate their work and the things that they've done. I like using Next.js in my projects but I want to make some parts of it a bit better. As a result, I decided to share my handy enhancement on Next.js Router.
-```

@@ -1,4 +1,4 @@
-name: TypeCheck, Lint, and Test
+name: TypeCheck, Lint, Test, and Coverage
 
 on:
   push:
@@ -18,6 +18,13 @@ jobs:
       - run: yarn install
       - run: yarn types:check
       - run: yarn lint
-      - run: yarn test
+      - run: yarn test --coverage
         env:
           CI: true
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        env:
+          COVERALLS_DEBUG: 1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
