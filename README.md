@@ -79,7 +79,3 @@ function getServerSideProps(c) {
 ## Creds
 
 I want to say thanks to the Next.js team and Vercel. I appreciate their work and the things that they've done. I like using Next.js in my projects but I want to make some parts of it a bit better. As a result, I decided to share my handy enhancement on Next.js Router.
-
-```
-
-```
