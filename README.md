@@ -42,11 +42,14 @@ Clean query object from url dynamic params
 - `query` - clean up query from values from `params`
 - `fullQuery` - keeps original object with all of the query
 
+#### Example
+
 ```js
 import { enchanteServerRouter } from 'enchanted-next-router'
 
 function getServerSideProps(c) {
   const ctx = enchanteServerRouter(c)
+  const { params, query, fullQuery } = ctx
 
   return {
     props: {
