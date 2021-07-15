@@ -1,38 +1,63 @@
 import { UrlObject } from 'url'
 import NextRouter, {
-  useRouter as useNextRouter,
-  NextRouter as INextRouter,
-  SingletonRouter,
+	useRouter as useNextRouter,
+	NextRouter as INextRouter,
+	SingletonRouter,
 } from 'next/router'
+import type { GetServerSidePropsContext } from 'next'
+import type { ParsedUrlQuery } from 'querystring'
 
 declare type Url = UrlObject | string
-interface TransitionOptions {
-  shallow?: boolean
-  locale?: string | false
-  scroll?: boolean
+type TransitionOptions = Parameters<typeof NextRouter.push>[2]
+
+type EnchantedFunctions = {
+	push: typeof push
+	replace: typeof replace
 }
 
-type RedefinedFunctions = {
-  push: typeof push
-  replace: typeof replace
+export type EnchantedSingletonRouter = Omit<SingletonRouter, 'push' | 'replace'> &
+	EnchantedFunctions
+
+export type EnchantedRouter = Omit<INextRouter, 'push' | 'replace'> &
+	EnchantedFunctions & {
+		fullQuery: INextRouter['query']
+		queryString: string | undefined
+		params: ParsedUrlQuery
+	}
+
+export function intersectObjects<
+	T1 extends { [k: string]: unknown },
+	T2 extends { [k: string]: unknown }
+>(source: T1, filter: T2) {
+	return Object.keys(filter).reduce(
+		(acc, key) => {
+			if (key in acc) {
+				delete acc[key]
+			}
+			return acc
+		},
+		{ ...source }
+	)
 }
 
-type ISingletonRouter = Omit<SingletonRouter, 'push' | 'replace'> &
-  RedefinedFunctions
+export function urlParamsToHashMap(params: URLSearchParams): ParsedUrlQuery {
+	const result: ParsedUrlQuery = {}
 
-type IRouter = Omit<INextRouter, 'push' | 'replace'> &
-  RedefinedFunctions & {
-    queryString: string | undefined
-    params: Record<string, string | string[] | undefined>
-  }
+	params.forEach((_, key) => {
+		const value = params.getAll(key)
+		result[key] = value.length === 1 ? value[0] : value
+	})
+
+	return result
+}
 
 /**
  * Performs a `pushState` with arguments
  * @param url of the route
  * @param options object you can define `shallow` and other options
  */
-function push(url: Url, opts?: TransitionOptions) {
-  return NextRouter.push(url, undefined, opts)
+export function push(url: Url, opts?: TransitionOptions) {
+	return NextRouter.push(url, undefined, opts)
 }
 
 /**
@@ -40,48 +65,34 @@ function push(url: Url, opts?: TransitionOptions) {
  * @param url of the route
  * @param options object you can define `shallow` and other options
  */
-function replace(url: Url, opts?: TransitionOptions) {
-  return NextRouter.replace(url, undefined, opts)
+export function replace(url: Url, opts?: TransitionOptions) {
+	return NextRouter.replace(url, undefined, opts)
 }
 
-export function useRouter(): IRouter {
-  const router = useNextRouter()
-  const [pathname, queryString] = router.asPath.split('?')
-  const searchParams = new URLSearchParams(queryString || '')
-  const params = { ...router.query }
-  const query: Record<string, string | string[]> = {}
+export function useRouter<P extends ParsedUrlQuery = {}>(): EnchantedRouter {
+	const router = useNextRouter()
+	const [pathname, queryString] = router.asPath.split('?')
+	const query = urlParamsToHashMap(new URLSearchParams(queryString || ''))
+	const params = intersectObjects({ ...router.query }, query) as P
 
-  searchParams.forEach((value, key) => {
-    if (params[key]) {
-      delete params[key]
-    }
-
-    const currentValue = query[key]
-
-    if (Array.isArray(currentValue)) {
-      currentValue.push(key)
-      return
-    }
-
-    if (typeof currentValue === 'string') {
-      query[key] = [currentValue, value]
-      return
-    }
-
-    query[key] = value
-  })
-
-  return {
-    ...router,
-    pathname,
-    queryString,
-    query,
-    params,
-    push,
-    replace,
-  }
+	return {
+		...router,
+		pathname,
+		queryString,
+		query,
+		params,
+		fullQuery: router.query,
+		push,
+		replace,
+	}
 }
 
-const Router: ISingletonRouter = { ...NextRouter, push, replace }
+export function enchanteServerRouter<P extends ParsedUrlQuery>(ctx: GetServerSidePropsContext<P>) {
+	const query = intersectObjects(ctx.query, ctx.params || {})
+
+	return Object.assign(ctx, { query, fullQuery: ctx.query })
+}
+
+const Router: EnchantedSingletonRouter = { ...NextRouter, push, replace }
 
 export default Router
