@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
@@ -16,6 +17,7 @@
     "target": "es5"
   },
   "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
   "watchOptions": {
     "watchFile": "useFsEvents",
     "watchDirectory": "useFsEvents",
