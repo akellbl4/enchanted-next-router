@@ -1,2 +1,9 @@
+[*]
+indent_style = tab
+
 [*.md]
+indent_style = space
 trim_trailing_whitespace = false
+
+[*.json]
+indent_style = space
