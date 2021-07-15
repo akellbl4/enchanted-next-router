@@ -27,6 +27,7 @@
     "lint": "eslint \"{src,test,examples}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{src,test,examples}/**/*.{ts,tsx}\" --fix",
     "test": "jest",
+    "test:coverage": "jest --coverage && coveralls < coverage/lcov.info",
     "register": "yarn link && cd node_modules/react && yarn link"
   },
   "husky": {
@@ -53,6 +54,7 @@
     "@typescript-eslint/parser": "4.28.3",
     "bunchee": "1.6.0",
     "concurrently": "6.2.0",
+    "coveralls": "3.1.1",
     "eslint": "7.30.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-jest-dom": "3.9.0",

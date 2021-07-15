@@ -32,7 +32,7 @@ describe('useRouter', () => {
 
 	it.each<TestCase>([
 		[
-			'name',
+			'without any params',
 			{
 				route: '/foo',
 				pathname: '/foo',
@@ -49,24 +49,7 @@ describe('useRouter', () => {
 			},
 		],
 		[
-			'name',
-			{
-				route: '/foo',
-				pathname: '/foo',
-				asPath: '/foo?fizz=buzz',
-				query: { fizz: 'buzz' },
-			},
-			{
-				route: '/foo',
-				pathname: '/foo',
-				asPath: '/foo?fizz=buzz',
-				query: { fizz: 'buzz' },
-				params: {},
-				fullQuery: { fizz: 'buzz' },
-			},
-		],
-		[
-			'name',
+			'without any query (longer pathname)',
 			{
 				route: '/foo/bar',
 				pathname: '/foo/bar',
@@ -83,7 +66,24 @@ describe('useRouter', () => {
 			},
 		],
 		[
-			'name',
+			'with query',
+			{
+				route: '/foo',
+				pathname: '/foo',
+				asPath: '/foo?fizz=buzz',
+				query: { fizz: 'buzz' },
+			},
+			{
+				route: '/foo',
+				pathname: '/foo',
+				asPath: '/foo?fizz=buzz',
+				query: { fizz: 'buzz' },
+				params: {},
+				fullQuery: { fizz: 'buzz' },
+			},
+		],
+		[
+			'with query',
 			{
 				route: '/foo/bar',
 				pathname: '/foo/bar',
@@ -100,7 +100,7 @@ describe('useRouter', () => {
 			},
 		],
 		[
-			'name',
+			'with params',
 			{
 				route: '/foo/[id]',
 				pathname: '/foo/[id]',
@@ -117,7 +117,7 @@ describe('useRouter', () => {
 			},
 		],
 		[
-			'name',
+			'with params and query',
 			{
 				route: '/foo/[id]',
 				pathname: '/foo/[id]',
@@ -134,7 +134,7 @@ describe('useRouter', () => {
 			},
 		],
 		[
-			'name',
+			'with params (more params)',
 			{
 				route: '/foo/[category]/[id]',
 				pathname: '/foo/[category]/[id]',
@@ -151,7 +151,7 @@ describe('useRouter', () => {
 			},
 		],
 		[
-			'name',
+			'with params and query (more params)',
 			{
 				route: '/foo/[category]/[id]',
 				pathname: '/foo/[category]/[id]',
@@ -167,7 +167,7 @@ describe('useRouter', () => {
 				fullQuery: { fizz: 'buzz', category: 'posts', id: '1' },
 			},
 		],
-	] as unknown as TestCase[])('should return pathname %s', (_, mock, expected) => {
+	] as unknown as TestCase[])('should return redefined router %s', (_, mock, expected) => {
 		jest.spyOn(router, 'useRouter').mockReturnValueOnce(mock)
 
 		const { result } = renderHook(() => useRouter())
