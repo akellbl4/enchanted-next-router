@@ -37,6 +37,28 @@ Drops second argument `as` because it's became unnecessary since 10.x
   - `shallow` - Update the path of the current page without rerunning getStaticProps, getServerSideProps or getInitialProps. Defaults to false
   - `locale` - Optional string, indicates locale of the new page
 
+### `enchanteServerRouter`
+
+Clean query object from url dynamic params
+
+- `query` - clean up query from values from `params`
+- `fullQuery` - keeps original object with all of the query
+
+```js
+import { enchanteServerRouter } from 'enchanted-next-router'
+
+function getServerSideProps(c) {
+  const ctx = enchanteServerRouter(c)
+
+  return {
+    props: {
+      params,
+      query,
+      fullQuery,
+    }
+  }
+}
+
 ### Properties
 
 `const { query, params, pathname } = useRouter()`
@@ -46,6 +68,7 @@ Drops second argument `as` because it's became unnecessary since 10.x
   For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post` -> `params` is `{ slug: 'my-blog-post' }`
 - `query` - Contains only params from query string.
   For example dynamic route is `/pages/blog/[slug]` and the current URL is `/pages/blog/my-blog-post?show=1` -> `params` is `{ show: '1' }`
+- `fullQuery` - Contains original `query` value before changes
 
 ## References
 
@@ -55,3 +78,4 @@ Drops second argument `as` because it's became unnecessary since 10.x
 ## Creds
 
 I want to say thanks to the Next.js team and Vercel. I appreciate their work and the things that they've done. I like using Next.js in my projects but I want to make some parts of it a bit better. As a result, I decided to share my handy enhancement on Next.js Router.
+```
