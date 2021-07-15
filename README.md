@@ -58,6 +58,7 @@ function getServerSideProps(c) {
     }
   }
 }
+```
 
 ### Properties
 
