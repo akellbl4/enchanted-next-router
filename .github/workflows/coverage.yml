@@ -19,7 +19,7 @@ jobs:
           yarn
           yarn test:coverage
 
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@1.1.3
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
