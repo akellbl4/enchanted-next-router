@@ -5,7 +5,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import * as router from 'next/router'
 
-import { EnchantedRouter, useRouter } from '../src/index'
+import { useRouter } from '../src/router'
 
 describe('useRouter', () => {
 	it('should return router', () => {
@@ -28,9 +28,7 @@ describe('useRouter', () => {
 		})
 	})
 
-	type TestCase = [string, router.NextRouter, EnchantedRouter]
-
-	it.each<TestCase>([
+	it.each([
 		[
 			'without any params',
 			{
@@ -167,8 +165,8 @@ describe('useRouter', () => {
 				fullQuery: { fizz: 'buzz', category: 'posts', id: '1' },
 			},
 		],
-	] as unknown as TestCase[])('should return redefined router %s', (_, mock, expected) => {
-		jest.spyOn(router, 'useRouter').mockReturnValueOnce(mock)
+	])('should return redefined router %s', (_, mock, expected) => {
+		jest.spyOn(router, 'useRouter').mockReturnValueOnce(mock as router.NextRouter)
 
 		const { result } = renderHook(() => useRouter())
 

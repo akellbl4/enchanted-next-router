@@ -1,32 +1,9 @@
-import { UrlObject } from 'url'
-import NextRouter, {
-	useRouter as useNextRouter,
-	NextRouter as INextRouter,
-	SingletonRouter,
-} from 'next/router'
-
+import NextRouter, { useRouter as useNextRouter } from 'next/router'
 import type { ParsedUrlQuery } from 'querystring'
 
 import { intersectObjects } from './lib/intersect-object'
 import { urlParamsToHashMap } from './lib/url-params-to-hash-map'
-
-declare type Url = UrlObject | string
-type TransitionOptions = Parameters<typeof NextRouter.push>[2]
-
-type EnchantedFunctions = {
-	push: typeof push
-	replace: typeof replace
-}
-
-export type EnchantedSingletonRouter = Omit<SingletonRouter, 'push' | 'replace'> &
-	EnchantedFunctions
-
-export type EnchantedRouter<P> = Omit<INextRouter, 'push' | 'replace'> &
-	EnchantedFunctions & {
-		fullQuery: INextRouter['query']
-		queryString: string | undefined
-		params: P
-	}
+import type { Url, TransitionOptions, EnchantedRouter, EnchantedSingletonRouter } from './types'
 
 /**
  * Performs a `pushState` with arguments

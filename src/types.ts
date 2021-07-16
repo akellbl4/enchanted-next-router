@@ -3,10 +3,10 @@ import NextRouter, { NextRouter as INextRouter, SingletonRouter } from 'next/rou
 
 import { push, replace } from './router'
 
-declare type Url = UrlObject | string
-type TransitionOptions = Parameters<typeof NextRouter.push>[2]
+export type Url = UrlObject | string
+export type TransitionOptions = Parameters<typeof NextRouter.push>[2]
 
-type EnchantedFunctions = {
+export type EnchantedFunctions = {
 	push: typeof push
 	replace: typeof replace
 }
