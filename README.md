@@ -34,7 +34,7 @@ npm install enchanted-next-router
 #### Example
 
 ```js
-import Router from 'enchanted-next-router
+import Router from 'enchanted-next-router'
 
 export default function MyComponent() {
   const { pathname } = useRouter()
