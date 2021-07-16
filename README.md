@@ -1,4 +1,4 @@
-# 🧙‍♂️ Enchanted Next.js Router &bullet; [![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router)](https://bundlephobia.com/package/enchanted-next-router@0.0.6-beta.5) [![Coverage Status](https://coveralls.io/repos/github/akellbl4/enchanted-next-router/badge.svg?branch=main)](https://coveralls.io/github/akellbl4/enchanted-next-router?branch=main)
+# 🧙‍♂️ Enchanted Next.js Router &bullet; [![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router)](https://bundlephobia.com/package/enchanted-next-router) [![Coverage Status](https://coveralls.io/repos/github/akellbl4/enchanted-next-router/badge.svg?branch=main)](https://coveralls.io/github/akellbl4/enchanted-next-router?branch=main)
 
 It re-exports the whole `next/router` with redefined routing functions and extended params.
 
