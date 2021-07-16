@@ -1,6 +1,6 @@
 # 🧙‍♂️ Enchanted Next.js Router &bullet; ![minzipped size](https://badgen.net/bundlephobia/minzip/enchanted-next-router) [![Coverage Status](https://coveralls.io/repos/github/akellbl4/enchanted-next-router/badge.svg?branch=main)](https://coveralls.io/github/akellbl4/enchanted-next-router?branch=main)
 
-It reexports the whole `next/router` with redefined routing functions and extended params.
+It re-exports the whole `next/router` with redefined routing functions and extended params.
 
 ## Install
 
