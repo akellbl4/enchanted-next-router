@@ -45,11 +45,17 @@ Clean query object from url dynamic params
 #### Example
 
 ```js
+// route: /foo/[fizz]/[buzz]
+//   url: /foo/bar/boom?id=5431
 import { enchanteServerRouter } from 'enchanted-next-router'
 
 function getServerSideProps(c) {
   const ctx = enchanteServerRouter(c)
-  const { params, query, fullQuery } = ctx
+  const {
+    params,    // { fizz: 'bar', buzz: 'boom' }
+    query,     // { id: '5431' }
+    fullQuery  // { id: '5431', fizz: 'bar', buzz: 'boom' }
+  } = ctx
 
   return {
     props: {
