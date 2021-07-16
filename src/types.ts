@@ -18,5 +18,7 @@ export type EnchantedRouter<P> = Omit<INextRouter, 'push' | 'replace'> &
 	EnchantedFunctions & {
 		fullQuery: INextRouter['query']
 		queryString: string | undefined
+		/** hash from url works only on client-size */
+		hash: string
 		params: P
 	}

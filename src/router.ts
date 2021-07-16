@@ -26,6 +26,7 @@ export function replace(url: Url, opts?: TransitionOptions) {
 export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter<P> {
 	const router = useNextRouter()
 	const [pathname, queryString] = router.asPath.split('?')
+	const [, hash = ''] = router.asPath.split('#')
 	const query = urlParamsToHashMap(new URLSearchParams(queryString || ''))
 	const params = intersectObjects({ ...router.query }, query) as P
 
@@ -34,12 +35,12 @@ export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter<P> {
 		pathname,
 		queryString,
 		query,
+		hash,
 		params,
 		fullQuery: router.query,
 		push,
 		replace,
 	}
 }
-
 
 export const Router: EnchantedSingletonRouter = { ...NextRouter, push, replace }
