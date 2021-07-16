@@ -83,6 +83,9 @@
       "require": "./dist/index.js"
     }
   },
+  "output": {
+    "exports": "named"
+  },
   "types": "./dist/types/index.d.ts",
   "files": [
     "dist/**"
