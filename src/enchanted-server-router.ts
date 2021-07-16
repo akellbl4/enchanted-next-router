@@ -3,7 +3,7 @@ import type { GetServerSidePropsContext } from 'next'
 
 import { intersectObjects } from "./lib/intersect-object"
 
-export function enchanteServerRouter<P extends ParsedUrlQuery>(ctx: Omit<GetServerSidePropsContext<P>, 'params'> & { params: P }) {
+export function enchanteServerRouter<P extends ParsedUrlQuery = ParsedUrlQuery>(ctx: GetServerSidePropsContext<P>): Omit<GetServerSidePropsContext<P>, 'params'> & { params: P } {
 	const params = ctx.params || {}
 	const query = intersectObjects(ctx.query, params)
 
