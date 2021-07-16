@@ -5,5 +5,5 @@ indent_style = tab
 indent_style = space
 trim_trailing_whitespace = false
 
-[*.{json,yml}]
+[*.{json,yml,eslintrc,prettierrc}]
 indent_style = space

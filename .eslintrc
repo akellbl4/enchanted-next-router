@@ -3,12 +3,13 @@
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
+    "createDefaultProgram": true,
     "ecmaFeatures": {
       "impliedStrict": true,
       "experimentalObjectRestSpread": true
     },
     "allowImportExportEverywhere": true,
-    "project": ["**/tsconfig.json", "tsconfig.test.json"]
+    "project": ["tsconfig.json", "tsconfig.test.json"]
   },
   "plugins": ["@typescript-eslint", "react-hooks"],
   "extends": [
