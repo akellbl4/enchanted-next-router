@@ -21,11 +21,11 @@ type EnchantedFunctions = {
 export type EnchantedSingletonRouter = Omit<SingletonRouter, 'push' | 'replace'> &
 	EnchantedFunctions
 
-export type EnchantedRouter = Omit<INextRouter, 'push' | 'replace'> &
+export type EnchantedRouter<P> = Omit<INextRouter, 'push' | 'replace'> &
 	EnchantedFunctions & {
 		fullQuery: INextRouter['query']
 		queryString: string | undefined
-		params: ParsedUrlQuery
+		params: P
 	}
 
 /**
@@ -46,7 +46,7 @@ export function replace(url: Url, opts?: TransitionOptions) {
 	return NextRouter.replace(url, undefined, opts)
 }
 
-export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter {
+export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter<P> {
 	const router = useNextRouter()
 	const [pathname, queryString] = router.asPath.split('?')
 	const query = urlParamsToHashMap(new URLSearchParams(queryString || ''))
@@ -64,10 +64,11 @@ export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter {
 	}
 }
 
-export function enchanteServerRouter<P extends ParsedUrlQuery>(ctx: GetServerSidePropsContext<P>) {
-	const query = intersectObjects(ctx.query, ctx.params || {})
+export function enchanteServerRouter<P extends ParsedUrlQuery>(ctx: Omit<GetServerSidePropsContext<P>, 'params'> & { params: P }) {
+	const params = ctx.params || {}
+	const query = intersectObjects(ctx.query, params)
 
-	return Object.assign(ctx, { query, fullQuery: ctx.query })
+	return Object.assign(ctx, { params, query, fullQuery: ctx.query })
 }
 
 const Router: EnchantedSingletonRouter = { ...NextRouter, push, replace }
