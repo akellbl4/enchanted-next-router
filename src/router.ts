@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import NextRouter, { useRouter as useNextRouter } from 'next/router'
 import type { ParsedUrlQuery } from 'querystring'
 
@@ -27,8 +28,12 @@ export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter<P> {
 	const router = useNextRouter()
 	const [pathname, queryString] = router.asPath.split('?')
 	const [, hash = ''] = router.asPath.split('#')
-	const query = urlParamsToHashMap(new URLSearchParams(queryString || ''))
-	const params = intersectObjects({ ...router.query }, query) as P
+	const [query, params] = useMemo(() => {
+		const q = urlParamsToHashMap(new URLSearchParams(queryString || ''))
+		const p = intersectObjects(router.query, q) as P
+
+		return [q, p]
+	}, [router.query, queryString])
 
 	return {
 		...router,
