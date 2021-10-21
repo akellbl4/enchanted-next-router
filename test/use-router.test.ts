@@ -165,6 +165,23 @@ describe('useRouter', () => {
 				fullQuery: { fizz: 'buzz', category: 'posts', id: '1' },
 			},
 		],
+		// [
+		// 	'with params and query that have the same keys in both params and query',
+		// 	{
+		// 		route: '/foo/[category]/[id]',
+		// 		pathname: '/foo/[category]/[id]',
+		// 		asPath: '/foo/posts/1?category=post&id=1',
+		// 		query: { fizz: 'buzz', category: 'posts', id: '1' },
+		// 	},
+		// 	{
+		// 		pathname: '/foo/posts/1',
+		// 		route: '/foo/[category]/[id]',
+		// 		asPath: '/foo/posts/1?fizz=buzz',
+		// 		params: { category: 'posts', id: '1' },
+		// 		query: { fizz: 'buzz' },
+		// 		fullQuery: { fizz: 'buzz', category: 'posts', id: '1' },
+		// 	},
+		// ],
 	])('should return redefined router %s', (_, mock, expected) => {
 		jest.spyOn(router, 'useRouter').mockReturnValueOnce(mock as router.NextRouter)
 

@@ -43,4 +43,13 @@ export function useRouter<P extends ParsedUrlQuery>(): EnchantedRouter<P> {
 	}
 }
 
-export const Router: EnchantedSingletonRouter = { ...NextRouter, push, replace }
+Object.defineProperties(NextRouter, {
+	push: {
+		value: push,
+	},
+	replace: {
+		value: replace,
+	},
+})
+
+export const Router = NextRouter as EnchantedSingletonRouter
